@@ -3,22 +3,39 @@
 //m = 3, n = 4.
 
 
-Console.WriteLine("Задайте количество строк двумерного массива:");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Задайте количество столбцов двумерного массива:");
-int n = Convert.ToInt32(Console.ReadLine());
-double[,] twoDimArray = new double[m, n];
-Random rnd = new Random();
-void PrintArray(double[,] matr)
-{ for (int i = 0; i < m; i++)
- { for (int j = 0; j < n; j++)
- { Console.Write($"{matr[i, j]} ");}
- Console.WriteLine();}}
+Console.Clear();
 
-void FillArray(double[,] matr)
-{ for (int i = 0; i < m; i++)
- { for (int j = 0; j < n; j++)
- { matr[i,j] = Convert.ToDouble(rnd.Next(-100, 100)/10.0);}}}
-FillArray(twoDimArray);
-Console.WriteLine();
-PrintArray(twoDimArray);
+Console.Write("Задайте количество строк двумерного массива: ");
+int rows = int.Parse(Console.ReadLine());
+
+Console.Write("Задайте количество столбцов двумерного массива: ");
+int columns = int.Parse(Console.ReadLine());
+
+double[,] arrayDouble = GetArrayDouble(rows, columns, 0, 10);
+PrintArrayDouble(arrayDouble);
+
+double[,] GetArrayDouble(int m, int n, int min, int max)
+{
+    double[,] result = new double [m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+          result[i, j] = new Random().NextDouble() * (max - min);
+        }
+    }
+    return result;
+}
+
+void PrintArrayDouble(double[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]:f1}");
+        }
+        Console.WriteLine();
+            }
+}
+Console.ReadLine();
